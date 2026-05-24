@@ -35,21 +35,6 @@ export default function FlowArtDefaultDemo() {
       {/* SECTION 1: HERO / IDENTITY */}
       <FlowSection aria-label="Rohith P B - Front End Developer" style={{ backgroundColor: '#0c0d16', color: '#ffffff' }}>
         <div className="flex flex-col h-full justify-between gap-8 h-full">
-          {/* Header Bar */}
-          <div className="flex flex-wrap justify-between items-center gap-4 border-b border-white/10 pb-6">
-            <div>
-              <p className="font-mono text-xs text-[#fd5200] uppercase tracking-[0.25em] font-semibold flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-[#fd5200] animate-ping"></span>
-                LIVE CORE ENGINE // ACTIVE
-              </p>
-            </div>
-            <div className="flex items-center gap-3 font-mono text-xs text-white/50">
-              <span>PORTFOLIO v2.0</span>
-              <span className="text-[#fd5200] font-bold">//</span>
-              <span>2026 EDITION</span>
-            </div>
-          </div>
-
           {/* Main Hero block */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto">
             <div className="lg:col-span-8 space-y-6">
