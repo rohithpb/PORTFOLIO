@@ -15,11 +15,13 @@ import {
   Flame,
   ArrowRight,
   ExternalLink,
-  BookOpen
+  BookOpen,
+  X
 } from 'lucide-react';
 
 export default function FlowArtDefaultDemo() {
   const [copiedText, setCopiedText] = useState<string | null>(null);
+  const [showInterviewModal, setShowInterviewModal] = useState(false);
 
   const handleCopy = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -561,16 +563,111 @@ export default function FlowArtDefaultDemo() {
             
             {/* Quick action triggers */}
             <div className="flex items-center gap-4">
-              <a 
-                href="mailto:pbrohith2@gmail.com"
-                className="flex items-center gap-1 bg-[#fd5200] hover:bg-[#ff7733] text-white px-4 py-2 rounded font-mono text-[11px] font-bold tracking-wider transition-colors uppercase cursor-pointer"
+              <button 
+                onClick={() => setShowInterviewModal(true)}
+                className="flex items-center gap-1.5 bg-[#fd5200] hover:bg-[#ff7733] text-white px-4 py-2 rounded font-mono text-[11px] font-bold tracking-wider transition-colors uppercase border-none cursor-pointer"
               >
                 INITIATE INTERVIEW <ArrowRight className="h-3.5 w-3.5" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </FlowSection>
+
+      {/* INTERVIEW DETAIL MODAL */}
+      {showInterviewModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300"
+          onClick={() => setShowInterviewModal(false)}
+        >
+          <div 
+            className="w-full max-w-md bg-[#0c0d16] border border-white/10 rounded-2xl p-6 shadow-2xl relative space-y-6 animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setShowInterviewModal(false)}
+              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/10"
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="space-y-2">
+              <p className="font-mono text-[10px] text-[#fd5200] uppercase tracking-[0.2em] font-semibold flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#fd5200] animate-pulse"></span>
+                SECURE CONSOLE INITIATED
+              </p>
+              <h3 className="text-xl font-bold uppercase text-white tracking-tight">CONTACT & CORES</h3>
+              <p className="text-xs text-white/60 font-light font-sans">
+                Review, connect, or copy digital directories to schedule interview procedures with Rohith P B.
+              </p>
+            </div>
+
+            <div className="space-y-3 font-mono">
+              {/* Mail ID Row */}
+              <div 
+                className="group flex flex-col p-4 bg-white/[0.02] border border-white/10 rounded-xl hover:border-white/20 transition-all cursor-pointer relative"
+                onClick={() => handleCopy('pbrohith2@gmail.com', 'Gmail-Modal')}
+              >
+                <div className="flex justify-between items-center text-[9px] text-white/40 uppercase mb-1">
+                  <span>EMAIL ADDRESS</span>
+                  <span className="text-[#fd5200] font-bold">{copiedText === 'Gmail-Modal' ? 'COPIED!' : 'CLICK TO COPY'}</span>
+                </div>
+                <div className="flex items-center gap-3 text-white">
+                  <Mail className="h-4 w-4 text-[#fd5200]" />
+                  <span className="text-xs sm:text-sm text-white/95 truncate">pbrohith2@gmail.com</span>
+                </div>
+                <div className="mt-2 text-[10px] text-white/40 border-t border-white/5 pt-2 flex justify-between items-center">
+                  <a href="mailto:pbrohith2@gmail.com" className="text-[#fd5200] hover:underline flex items-center gap-1 text-[10px]" onClick={(e) => e.stopPropagation()}>
+                    Direct mail link <ExternalLink className="h-2.5 w-2.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Phone Row */}
+              <div 
+                className="group flex flex-col p-4 bg-white/[0.02] border border-white/10 rounded-xl hover:border-white/20 transition-all cursor-pointer"
+                onClick={() => handleCopy('+91 8590489146', 'Phone-Modal')}
+              >
+                <div className="flex justify-between items-center text-[9px] text-white/40 uppercase mb-1">
+                  <span>PHONE NUMBER</span>
+                  <span className="text-[#fd5200] font-bold">{copiedText === 'Phone-Modal' ? 'COPIED!' : 'CLICK TO COPY'}</span>
+                </div>
+                <div className="flex items-center gap-3 text-white">
+                  <Phone className="h-4 w-4 text-[#fd5200]" />
+                  <span className="text-xs sm:text-sm text-white/95">+91 8590489146</span>
+                </div>
+              </div>
+
+              {/* LinkedIn Row */}
+              <a 
+                href="https://linkedin.com/in/rohith-p-b-2b573a36b" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex flex-col p-4 bg-white/[0.02] border border-white/10 hover:border-white/20 rounded-xl transition-all cursor-pointer text-left"
+              >
+                <div className="flex justify-between items-center text-[9px] text-white/40 uppercase mb-1">
+                  <span>LINKEDIN URL</span>
+                  <span className="text-white/45 group-hover:text-white/90 transition-colors flex items-center gap-1">GO TO LINK <ExternalLink className="h-2.5 w-2.5" /></span>
+                </div>
+                <div className="flex items-center gap-3 text-white">
+                  <Linkedin className="h-4 w-4 text-[#fd5200]" />
+                  <span className="text-xs sm:text-sm text-white/95 truncate">linkedin.com/in/rohith-p-b-2b573a36b</span>
+                </div>
+              </a>
+            </div>
+
+            <div className="flex gap-3">
+              <button 
+                onClick={() => setShowInterviewModal(false)}
+                className="flex-1 text-center py-2.5 bg-[#fd5200]/10 hover:bg-[#fd5200]/20 text-[#fd5200] hover:text-white font-mono text-xs font-bold rounded-lg border border-[#fd5200]/20 hover:border-[#fd5200]/40 transition-all cursor-pointer uppercase tracking-wider"
+              >
+                CLOSE PORT
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </FlowArt>
   );
