@@ -141,18 +141,18 @@ export default function FlowArtDefaultDemo() {
       </FlowSection>
 
       {/* SECTION 2: EXPERIENCE METRIC */}
-      <FlowSection aria-label="Rohith P B - Software Experience" style={{ backgroundColor: '#090a14', color: '#fff' }}>
+      <FlowSection aria-label="Rohith P B - Software Experience" style={{ backgroundColor: '#fd5200', color: '#ffffff' }}>
         <div className="flex flex-col h-full justify-between gap-8 h-full">
           <div>
-            <p className="font-mono text-xs text-[#fd5200] uppercase tracking-[0.2em]">02 — SW DEVELOPMENT INITIATIVES</p>
-            <hr className="my-[2vw] border-none border-t border-white/10" />
+            <p className="font-mono text-xs text-black font-bold uppercase tracking-[0.2em]">02 — SW DEVELOPMENT INITIATIVES</p>
+            <hr className="my-[2vw] border-none border-t border-black/15" />
             
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
               <h2 className="text-[clamp(2.5rem,7vw,7rem)] font-bold leading-[0.85] uppercase tracking-tight text-white">
                 PRACTICAL <br />
                 EXPERIENCE
               </h2>
-              <p className="max-w-[45ch] text-sm text-white/60 font-light leading-relaxed mb-1">
+              <p className="max-w-[45ch] text-sm text-black/80 font-normal leading-relaxed mb-1">
                 Direct contributions, deployment sprints, and engineering milestones achieved across rigorous internship timelines and technical code environments.
               </p>
             </div>
@@ -160,7 +160,7 @@ export default function FlowArtDefaultDemo() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-auto">
             {/* Experience Card 1 */}
-            <div className="bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] transition-all group relative overflow-hidden">
+            <div className="bg-black/90 hover:bg-black border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] hover:border-white/20 transition-all group relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 right-0 p-3">
                 <span className="font-mono text-[9px] text-[#fd5200] bg-[#fd5200]/10 border border-[#fd5200]/25 px-2 py-0.5 rounded-full uppercase">KGISL</span>
               </div>
@@ -172,18 +172,18 @@ export default function FlowArtDefaultDemo() {
                   <h3 className="font-bold text-lg text-white group-hover:text-[#fd5200] transition-colors leading-snug">Full Stack Development Intern</h3>
                   <p className="font-mono text-xs text-white/40 mt-1">KGISL Technology</p>
                 </div>
-                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                <p className="text-xs text-slate-350 font-light leading-relaxed">
                   Implemented and integrated responsive components, managed API bindings, and reinforced design patterns to maximize browser rendering efficiency.
                 </p>
               </div>
               <div className="border-t border-white/5 pt-4 mt-6">
                 <span className="font-mono text-[10px] text-white/50 block">SKILLS DIRECTLY CONCERNED:</span>
-                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block">React, HTML, CSS, JavaScript, DB</span>
+                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block font-semibold">React, HTML, CSS, JavaScript, DB</span>
               </div>
             </div>
 
             {/* Experience Card 2 */}
-            <div className="bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] transition-all group relative overflow-hidden">
+            <div className="bg-black/90 hover:bg-black border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] hover:border-white/20 transition-all group relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 right-0 p-3">
                 <span className="font-mono text-[9px] text-[#fd5200] bg-[#fd5200]/10 border border-[#fd5200]/25 px-2 py-0.5 rounded-full uppercase">ICT Academy</span>
               </div>
@@ -195,18 +195,18 @@ export default function FlowArtDefaultDemo() {
                   <h3 className="font-bold text-lg text-white group-hover:text-[#fd5200] transition-colors leading-snug">Android Development Intern</h3>
                   <p className="font-mono text-xs text-white/40 mt-1">ICT Academy of Kerala</p>
                 </div>
-                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                <p className="text-xs text-slate-350 font-light leading-relaxed">
                   Engineered custom user interface elements, tested application integrity metrics, and customized layout matrices within the native space.
                 </p>
               </div>
               <div className="border-t border-white/5 pt-4 mt-6">
                 <span className="font-mono text-[10px] text-white/50 block">SKILLS DIRECTLY CONCERNED:</span>
-                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block">Android SDK, Kotlin UI, XML</span>
+                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block font-semibold">Android SDK, Kotlin UI, XML</span>
               </div>
             </div>
 
             {/* Experience Card 3 */}
-            <div className="bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] transition-all group relative overflow-hidden">
+            <div className="bg-black/90 hover:bg-black border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] hover:border-white/20 transition-all group relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 right-0 p-3">
                 <span className="font-mono text-[9px] text-[#fd5200] bg-[#fd5200]/10 border border-[#fd5200]/25 px-2 py-0.5 rounded-full uppercase">System Tron</span>
               </div>
@@ -218,18 +218,18 @@ export default function FlowArtDefaultDemo() {
                   <h3 className="font-bold text-lg text-white group-hover:text-[#fd5200] transition-colors leading-snug">Python Programming Intern</h3>
                   <p className="font-mono text-xs text-white/40 mt-1">System Tron Systems</p>
                 </div>
-                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                <p className="text-xs text-slate-350 font-light leading-relaxed">
                   Engineered system automation automation processes, custom scripts for structured datasets, and optimized algorithmic calculation models.
                 </p>
               </div>
               <div className="border-t border-white/5 pt-4 mt-6">
                 <span className="font-mono text-[10px] text-white/50 block">SKILLS DIRECTLY CONCERNED:</span>
-                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block">Python, Pandas, Data Parsing</span>
+                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block font-semibold">Python, Pandas, Data Parsing</span>
               </div>
             </div>
 
             {/* Experience Card 4 */}
-            <div className="bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] transition-all group relative overflow-hidden">
+            <div className="bg-black/90 hover:bg-black border border-white/10 p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] hover:border-white/20 transition-all group relative overflow-hidden shadow-2xl">
               <div className="absolute top-0 right-0 p-3">
                 <span className="font-mono text-[9px] text-[#fd5200] bg-[#fd5200]/10 border border-[#fd5200]/25 px-2 py-0.5 rounded-full uppercase">IEEE PELS</span>
               </div>
@@ -241,20 +241,20 @@ export default function FlowArtDefaultDemo() {
                   <h3 className="font-bold text-lg text-white group-hover:text-[#fd5200] transition-colors leading-snug">I HACK Hackathon participant</h3>
                   <p className="font-mono text-xs text-white/40 mt-1">IEEE PELS & IAS SBC JECC</p>
                 </div>
-                <p className="text-xs text-slate-400 font-light leading-relaxed">
+                <p className="text-xs text-slate-350 font-light leading-relaxed">
                   24-Hour full-speed collaborative hackathon session focusing on building live software solving atmospheric and functional societal pain points.
                 </p>
               </div>
               <div className="border-t border-white/5 pt-4 mt-6">
                 <span className="font-mono text-[10px] text-white/50 block">SKILLS DIRECTLY CONCERNED:</span>
-                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block">Sprint Planning, Pitching, Rapid Prototype</span>
+                <span className="font-mono text-[9px] text-[#fd5200] mt-1 block font-semibold">Sprint Planning, Pitching, Rapid Prototype</span>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-white/50">
+          <div className="border-t border-black/15 pt-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-black/85">
             <span>// KEYWORDS: STACK-TRACE, INTEGRITY, METRIC MATCHING</span>
-            <span>EXPERIENCE SCORE: EXCELLENT (99.2%)</span>
+            <span className="font-semibold">EXPERIENCE SCORE: EXCELLENT (99.2%)</span>
           </div>
         </div>
       </FlowSection>
