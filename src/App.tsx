@@ -41,6 +41,12 @@ export default function App() {
   const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [activeExpIdx, setActiveExpIdx] = useState<number>(0);
+  
+  // Projects filtering and search state variables
+  const [projectSearch, setProjectSearch] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('All');
+
   const [cliLogs, setCliLogs] = useState<string[]>([
     "INITIALIZING_PORTFOLIO_SYSTEM... OK",
     "GATHERING CORE DATA: Rohith_P_B (Front_End_Engineer)... OK",
@@ -161,6 +167,91 @@ export default function App() {
       tech: ['Rapid Prototyping', 'UI Design Sheets', 'Team Leadership', 'Presentations']
     }
   ];
+
+  // Defined project node items matching his skill sectors & college background
+  const projectsList = [
+    {
+      id: 'proj-01',
+      title: 'Interactive GSAP Flow Portfolio',
+      category: 'Web Development',
+      language: 'React',
+      tech: ['React.js', 'Vite', 'Tailwind v4', 'GSAP', 'TypeScript'],
+      description: 'Personal responsive portfolio website built with deep dark-themed layout grids, a real-time HUD navigations matrix, and custom interactive terminal consoles.',
+      status: 'Live' as const,
+      locked: false,
+      codeLink: 'https://github.com/rohith-p-b/portfolio-flow',
+    },
+    {
+      id: 'proj-02',
+      title: 'KGISL Diagnostic Endpoint Monitor',
+      category: 'Web Development',
+      language: 'JavaScript',
+      tech: ['React.js', 'Express', 'Tailwind CSS', 'REST API', 'Charts'],
+      description: 'Visual status monitor representing mock API socket queries, server-side CPU loads, and route latency logs built during the KGISL Internship.',
+      status: 'Concept' as const,
+      locked: false,
+      codeLink: 'https://github.com/rohith-p-b/kgisl-monitor',
+    },
+    {
+      id: 'proj-03',
+      title: 'Procedural CSV Clean Scraper',
+      category: 'Tool',
+      language: 'Python',
+      tech: ['Python 3', 'Pandas Module', 'Regular Expressions', 'Data Analytics'],
+      description: 'High-performance automation scripts created to parse bulk text values, discard stale indices, and outputs clean logs for database updates.',
+      status: 'Soon' as const,
+      locked: true,
+      codeLink: '',
+    },
+    {
+      id: 'proj-04',
+      title: 'Smart Classroom Sync App',
+      category: 'Mobile App',
+      language: 'Kotlin',
+      tech: ['Android SDK', 'Kotlin v2', 'XML UI Sheets', 'SQLite DB'],
+      description: 'A native student attendance manager recording session counts, student metrics, and generating reports, optimized during the ICT Academy of Kerala Internship.',
+      status: 'Soon' as const,
+      locked: true,
+      codeLink: '',
+    },
+    {
+      id: 'proj-05',
+      title: 'Holographic Atmospheric HUD',
+      category: 'Web Development',
+      language: 'JavaScript',
+      tech: ['React.js', 'Vite', 'Tailwind', 'OpenWeather API'],
+      description: 'Minimal weather micro-hud featuring high-contrast details of local latitude coordinate sensors, humidity factors, and wind vectors.',
+      status: 'Concept' as const,
+      locked: false,
+      codeLink: 'https://github.com/rohith-p-b/weather-hud',
+    },
+    {
+      id: 'proj-06',
+      title: 'SQL Cluster Optimizer Suite',
+      category: 'Tool',
+      language: 'SQL',
+      tech: ['PostgreSQL', 'SQL DB Subqueries', 'Explain Analyze', 'Terminal'],
+      description: 'Terminal optimization toolkit reading raw EXPLAIN data and suggesting indexes for multi-table connections, reducing server latency.',
+      status: 'Soon' as const,
+      locked: true,
+      codeLink: '',
+    }
+  ];
+
+  // Primary filtering query evaluator
+  const filteredProjects = projectsList.filter((project) => {
+    const query = projectSearch.toLowerCase().trim();
+    const matchesSearch = 
+      project.title.toLowerCase().includes(query) ||
+      project.description.toLowerCase().includes(query) ||
+      project.tech.some(t => t.toLowerCase().includes(query)) ||
+      project.language.toLowerCase().includes(query);
+
+    const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory;
+    const matchesLanguage = selectedLanguage === 'All' || project.language === selectedLanguage;
+
+    return matchesSearch && matchesCategory && matchesLanguage;
+  });
 
   return (
     <FlowContainer>
@@ -551,7 +642,7 @@ export default function App() {
         </div>
       </FlowSection>
 
-      {/* 5. PROJECTS PLACEHOLDERS */}
+      {/* 5. PROJECTS ARCHIVE */}
       <FlowSection id="projects" index={4}>
         <div id="projects-container" className="space-y-8">
           
@@ -564,133 +655,192 @@ export default function App() {
                 PROJECTS <span className="text-white/40">ARCHIVE</span>
               </h2>
               <span className="gsap-fade-in font-mono text-xs text-electric-cyan font-medium tracking-widest uppercase bg-electric-cyan/5 border border-electric-cyan/20 px-2.5 py-1 rounded">
-                COMING SOON // FILL_MODE_ACTIVE
+                STAGE SYSTEM // READY_INDEX_DEVICES
               </span>
             </div>
           </div>
 
-          {/* Three styled project cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Card 1 */}
-            <div className="gsap-fade-in border border-[#161726] bg-[#050611]/80 hover:bg-[#080a1d] p-6 rounded duration-300 flex flex-col justify-between group relative overflow-hidden">
-              <div className="absolute top-0 right-0 h-10 w-24 bg-[#111] text-gray-600 font-mono text-[8px] text-center border-l border-b border-[#222] uppercase tracking-widest py-1 flex items-center justify-center select-none">
-                LOCK_SECURE
-              </div>
+          {/* Technical Search and Filter Panel Deck */}
+          <div className="gsap-fade-in border border-[#14152e] bg-[#040510]/95 p-6 rounded-lg space-y-5">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-4 justify-between">
               
-              <div className="space-y-4">
-                <div className="h-9 w-9 rounded bg-[#10142c] border border-gray-800 flex items-center justify-center text-[#474a68]">
-                  <FolderLock className="h-4.5 w-4.5 text-gray-500" />
+              {/* Search terminal box */}
+              <div className="relative flex-1 group">
+                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                  <Search className="h-4 w-4 text-electric-cyan/60 group-hover:text-electric-cyan transition-colors" />
                 </div>
-
-                <div className="space-y-1">
-                  <h3 className="font-display font-bold text-white text-base tracking-wide group-hover:text-electric-cyan transition-colors">
-                    PROJ__ALPHA
-                  </h3>
-                  <p className="font-mono text-[9px] text-electric-cyan uppercase tracking-wider">
-                    RESERVED_SLOT // ROHITH P B
-                  </p>
-                </div>
-
-                <p className="text-xs text-gray-400 font-light leading-relaxed">
-                  Project Title Coming Soon. Core technology stack involves advanced dynamic components in React, custom state caching, and responsive tailwind layout interfaces.
-                </p>
+                <input 
+                  type="text"
+                  value={projectSearch}
+                  onChange={(e) => setProjectSearch(e.target.value)}
+                  placeholder="SEARCH_PROJ_DB: Type 'React', 'Kotlin', 'Express', or title..."
+                  className="w-full bg-[#020206] border border-[#1a1e3b] hover:border-electric-cyan/40 focus:border-electric-cyan/80 p-3 pl-10 pr-10 rounded text-xs font-mono text-white placeholder-gray-600 outline-none transition-all placeholder:font-mono"
+                />
+                {projectSearch && (
+                  <button 
+                    onClick={() => setProjectSearch('')}
+                    className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-electric-cyan transition-colors font-mono text-xs px-2"
+                  >
+                    ×
+                  </button>
+                )}
               </div>
 
-              <div className="mt-8 space-y-4">
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#13162b]">
-                  <span className="font-mono text-[9px] text-[#474a68] select-none uppercase">STACK:</span>
-                  <span className="font-mono text-[9px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded">React.js</span>
-                  <span className="font-mono text-[9px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded">Vite</span>
-                  <span className="font-mono text-[9px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded">Tailwind</span>
-                </div>
-
-                <button className="w-full text-center py-2.5 rounded bg-[#0a0c1a] border border-[#1a1e35] font-mono text-[10px] tracking-widest text-[#474a68] font-semibold cursor-not-allowed uppercase flex items-center justify-center gap-1.5 transition-colors">
-                  <FolderLock className="h-3 w-3" />
-                  STAGING_PENDING
-                </button>
+              {/* Status readout metric */}
+              <div className="flex items-center gap-3 bg-[#0a0c1e] px-4 py-2.5 rounded border border-[#1b1e3e] font-mono text-[10px] whitespace-nowrap self-start lg:self-auto select-none">
+                <span className={`h-2 w-2 rounded-full animate-pulse ${filteredProjects.length > 0 ? 'bg-[#39ff14]' : 'bg-[#ff3b3b]'}`}></span>
+                <span className="text-gray-400">INDEX MATCH:</span>
+                <span className="text-electric-cyan font-bold">{filteredProjects.length} / {projectsList.length} UNITS</span>
               </div>
             </div>
 
-            {/* Card 2 */}
-            <div className="gsap-fade-in border border-[#161726] bg-[#050611]/80 hover:bg-[#080a1d] p-6 rounded duration-300 flex flex-col justify-between group relative overflow-hidden">
-              <div className="absolute top-0 right-0 h-10 w-24 bg-[#111] text-gray-600 font-mono text-[8px] text-center border-l border-b border-[#222] uppercase tracking-widest py-1 flex items-center justify-center select-none">
-                LOCK_SECURE
-              </div>
-              
-              <div className="space-y-4">
-                <div className="h-9 w-9 rounded bg-[#10142c] border border-gray-800 flex items-center justify-center text-[#474a68]">
-                  <FolderLock className="h-4.5 w-4.5 text-gray-500" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-[#12142d]/60">
+              {/* Category Filter */}
+              <div className="space-y-1.5">
+                <label className="block font-mono text-[9px] text-[#474a68] uppercase tracking-widest">// CATEGORY CORE FILTER</label>
+                <div className="flex flex-wrap gap-1.5">
+                  {['All', 'Web Development', 'Mobile App', 'Tool'].map((cat) => {
+                    const isActive = selectedCategory === cat;
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`px-3 py-1.5 rounded font-mono text-[9px] tracking-wider transition-all duration-200 cursor-pointer ${
+                          isActive 
+                            ? 'bg-electric-cyan border border-electric-cyan text-[#020205] font-bold shadow-[0_0_8px_rgba(0,255,255,0.25)]' 
+                            : 'bg-[#03040b] border border-[#141630] text-gray-400 hover:text-white hover:border-gray-700'
+                        }`}
+                      >
+                        {cat.toUpperCase()}
+                      </button>
+                    );
+                  })}
                 </div>
-
-                <div className="space-y-1">
-                  <h3 className="font-display font-bold text-white text-base tracking-wide group-hover:text-electric-blue transition-colors">
-                    PROJ__BETA
-                  </h3>
-                  <p className="font-mono text-[9px] text-electric-blue uppercase tracking-wider">
-                    RESERVED_SLOT // ROHITH P B
-                  </p>
-                </div>
-
-                <p className="text-xs text-gray-400 font-light leading-relaxed">
-                  Project Title Coming Soon. Core mechanics integrate interactive canvas drawings, visual performance checks, and customizable grid controls.
-                </p>
-              </div>
-
-              <div className="mt-8 space-y-4">
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#13162b]">
-                  <span className="font-mono text-[9px] text-[#474a68] select-none uppercase">STACK:</span>
-                  <span className="font-mono text-[9px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded">Python Script</span>
-                  <span className="font-mono text-[9px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded">SQL Dev</span>
-                </div>
-
-                <button className="w-full text-center py-2.5 rounded bg-[#0a0c1a] border border-[#1a1e35] font-mono text-[10px] tracking-widest text-[#474a68] font-semibold cursor-not-allowed uppercase flex items-center justify-center gap-1.5 transition-colors">
-                  <FolderLock className="h-3 w-3" />
-                  STAGING_PENDING
-                </button>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="gsap-fade-in border border-[#161726] bg-[#050611]/80 hover:bg-[#080a1d] p-6 rounded duration-300 flex flex-col justify-between group relative overflow-hidden">
-              <div className="absolute top-0 right-0 h-10 w-24 bg-[#111] text-gray-600 font-mono text-[8px] text-center border-l border-b border-[#222] uppercase tracking-widest py-1 flex items-center justify-center select-none">
-                LOCK_SECURE
-              </div>
-              
-              <div className="space-y-4">
-                <div className="h-9 w-9 rounded bg-[#10142c] border border-gray-800 flex items-center justify-center text-[#474a68]">
-                  <FolderLock className="h-4.5 w-4.5 text-gray-500" />
-                </div>
-
-                <div className="space-y-1">
-                  <h3 className="font-display font-bold text-white text-base tracking-wide group-hover:text-electric-green transition-colors">
-                    PROJ__GAMMA
-                  </h3>
-                  <p className="font-mono text-[9px] text-electric-green uppercase tracking-wider">
-                    RESERVED_SLOT // ROHITH P B
-                  </p>
-                </div>
-
-                <p className="text-xs text-gray-400 font-light leading-relaxed">
-                  Project Title Coming Soon. Intended for custom responsive dashboard frameworks, integrating distributed system panels and API health probes.
-                </p>
               </div>
 
-              <div className="mt-8 space-y-4">
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#13162b]">
-                  <span className="font-mono text-[9px] text-[#474a68] select-none uppercase">STACK:</span>
-                  <span className="font-mono text-[9px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded">Android SDK</span>
-                  <span className="font-mono text-[9px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded">Kotlin v2</span>
+              {/* Language Filter */}
+              <div className="space-y-1.5">
+                <label className="block font-mono text-[9px] text-[#474a68] uppercase tracking-widest">// CODING SYSTEM LANGUAGE</label>
+                <div className="flex flex-wrap gap-1.5">
+                  {['All', 'React', 'JavaScript', 'Python', 'Kotlin', 'SQL'].map((lang) => {
+                    const isActive = selectedLanguage === lang;
+                    return (
+                      <button
+                        key={lang}
+                        onClick={() => setSelectedLanguage(lang)}
+                        className={`px-2.5 py-1.5 rounded font-mono text-[9px] tracking-wider transition-all duration-200 cursor-pointer ${
+                          isActive 
+                            ? 'bg-electric-blue border border-electric-blue text-white font-bold shadow-[0_0_8px_rgba(26,61,232,0.25)]' 
+                            : 'bg-[#03040b] border border-[#141630] text-gray-400 hover:text-white hover:border-gray-700'
+                        }`}
+                      >
+                        {lang.toUpperCase()}
+                      </button>
+                    );
+                  })}
                 </div>
-
-                <button className="w-full text-center py-2.5 rounded bg-[#0a0c1a] border border-[#1a1e35] font-mono text-[10px] tracking-widest text-[#474a68] font-semibold cursor-not-allowed uppercase flex items-center justify-center gap-1.5 transition-colors">
-                  <FolderLock className="h-3 w-3" />
-                  STAGING_PENDING
-                </button>
               </div>
             </div>
-
           </div>
+
+          {/* Dynamic projects loading bay */}
+          {filteredProjects.length === 0 ? (
+            <div className="gsap-fade-in border border-dashed border-[#202344]/50 rounded p-12 text-center bg-[#04050e]/60 flex flex-col items-center justify-center space-y-4">
+              <div className="p-3 bg-[#ff3b3b]/10 text-[#ff3b3b] border border-[#ff3b3b]/20 rounded-full">
+                <FolderLock className="h-6 w-6" />
+              </div>
+              <div className="space-y-1">
+                <h4 className="font-display font-medium text-white text-sm uppercase tracking-wide">ZERO BLUEPRINTS FOUND</h4>
+                <p className="text-xs text-[#9ea3c0] max-w-sm font-mono mx-auto">
+                  No core repositories matched search terms or selected filters. Reset parameters to retrieve data.
+                </p>
+              </div>
+              <button 
+                onClick={() => { setProjectSearch(''); setSelectedCategory('All'); setSelectedLanguage('All'); }}
+                className="px-4 py-2 bg-[#090b1e] hover:bg-[#12163a] text-electric-cyan font-mono text-[10px] tracking-widest font-bold uppercase transition-all duration-300 rounded border border-electric-cyan/25 cursor-pointer"
+              >
+                RESET TERMINAL PARAMS
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProjects.map((project) => (
+                <div 
+                  key={project.id}
+                  className="gsap-fade-in border border-[#161726] bg-[#050611]/80 hover:bg-[#080a1d]/90 p-6 rounded duration-300 flex flex-col justify-between group relative overflow-hidden"
+                >
+                  {/* Absolute top badge index status */}
+                  <div className={`absolute top-0 right-0 h-8 px-3 text-[8.5px] font-mono text-center border-l border-b flex items-center justify-center uppercase tracking-widest select-none ${
+                    project.status === 'Live' 
+                      ? 'bg-[#39ff14]/10 text-electric-green border-[#39ff14]/25' 
+                      : project.status === 'Concept'
+                      ? 'bg-electric-cyan/10 text-electric-cyan border-electric-cyan/25'
+                      : 'bg-electric-blue/10 text-electric-blue border-electric-blue/25'
+                  }`}>
+                    {project.status === 'Live' ? 'LIVE // PROD' : project.status === 'Concept' ? 'CONCEPT // FE' : 'STAGING // LOCK'}
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {/* Icon HUD card decoration */}
+                    <div className="h-9 w-9 rounded bg-[#10142c] border border-gray-800/80 flex items-center justify-center text-[#474a68]">
+                      {project.locked ? (
+                        <FolderLock className="h-4.5 w-4.5 text-gray-500" />
+                      ) : (
+                        <Code2 className="h-4.5 w-4.5 text-electric-cyan" />
+                      )}
+                    </div>
+
+                    <div className="space-y-1 pr-12">
+                      <h3 className="font-display font-bold text-white text-base tracking-wide group-hover:text-electric-cyan transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="font-mono text-[9px] text-electric-blue uppercase tracking-wider">
+                        {project.category}
+                      </p>
+                    </div>
+
+                    <p className="text-xs text-gray-400 font-light leading-relaxed min-h-[60px]">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 space-y-4">
+                    {/* Tech tag list */}
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#13162b] min-h-[50px] content-start">
+                      {project.tech.map((t, idx) => (
+                        <span 
+                          key={idx} 
+                          className="font-mono text-[8px] text-white bg-[#0f111f] border border-[#1a1e35] px-2 py-0.5 rounded select-none"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    {project.locked ? (
+                      <button 
+                        disabled
+                        className="w-full text-center py-2.5 rounded bg-[#0a0c1a] border border-[#1a1e35] font-mono text-[10px] tracking-widest text-[#474a68] font-semibold cursor-not-allowed uppercase flex items-center justify-center gap-1.5 transition-colors"
+                      >
+                        <FolderLock className="h-3 w-3" />
+                        STAGING_PENDING
+                      </button>
+                    ) : (
+                      <a 
+                        href={project.codeLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full text-center py-2.5 rounded bg-gradient-to-r from-[#0d102e] to-[#040615] border border-[#1e245a]/70 hover:border-electric-cyan hover:bg-[#070d2b] font-mono text-[10px] tracking-widest text-[#a1a7cd] hover:text-white font-semibold uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                      >
+                        <ExternalLink className="h-3 w-3 text-electric-cyan" />
+                        EXPLORE_CODEBASE
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Quick interactive utility widget: Code snippet copy sandbox */}
           <div className="gsap-fade-in p-6 bg-[#040614] border border-[#111326] rounded space-y-4">
@@ -699,16 +849,16 @@ export default function App() {
                 <GitBranch className="h-4.5 w-4.5 text-electric-cyan" />
                 DOCKER_LAUNCH_RUN_CONFIG
               </h3>
-              <span className="font-mono text-[9px] text-gray-500">v1.0.0-PROT</span>
+              <span className="font-mono text-[9px] text-gray-500">v1.2.0-PROOT</span>
             </div>
             <p className="text-xs text-[#9ea3c0] leading-relaxed font-light">
-              Rohith P B ensures clean delivery bounds. Copy the standard run snippet of this custom React portfolio framework:
+              Rohith P B ensures clean deployment bounds. Copy the standard clone command for building this custom React cyber portfolio frame:
             </p>
             <div className="bg-[#020205] p-3.5 rounded border border-[#111326]/80 flex items-center justify-between">
-              <code className="font-mono text-xs text-electric-green overflow-x-auto select-all whitespace-pre block [direction:ltr]">
-                git clone https://github.com/rohith-p-b/portfolio.git && npm run dev
+              <code className="font-mono text-[11px] text-electric-cyan overflow-x-auto select-all whitespace-pre block [direction:ltr]">
+                git clone https://github.com/rohith-p-b/portfolio-flow.git && npm run dev
               </code>
-              <span className="text-[9px] font-mono text-[#474a68] uppercase bg-[#111328] px-2 py-1 rounded border border-[#161b3b] select-none">
+              <span className="text-[9px] font-mono text-[#00ffff] uppercase bg-[#111328] px-2.5 py-1 rounded border border-electric-cyan/20 select-none">
                 COPYABLE_MOCK
               </span>
             </div>
